@@ -3,6 +3,9 @@ import type { CSSProperties } from "react";
 import HeroMotion from "./HeroMotion";
 import { WorkReveal } from "./WorkReveal";
 
+const siteBasePath = process.env.NEXT_PUBLIC_SITE_BASE_PATH ?? "";
+const assetPath = (path: string) => `${siteBasePath}${path}`;
+
 // EDIT YOUR DETAILS HERE
 const siteConfig = {
   name: "Aditya Kumar",
@@ -21,28 +24,28 @@ const designWork = [
     title: "Don\u2019t Fear",
     type: "Concept Poster",
     year: "2026",
-    image: "/portfolio/dont-fear.webp",
+    image: assetPath("/portfolio/dont-fear.webp"),
     alt: "Surreal Don't Fear poster with a desert, stars and a doorway into the sky",
   },
   {
     title: "My Little Setup",
     type: "Social Creative",
     year: "2026",
-    image: "/portfolio/my-setup.webp",
+    image: assetPath("/portfolio/my-setup.webp"),
     alt: "Warm desk setup social media design featuring a laptop, tablet, mouse and phone",
   },
   {
     title: "Stairway to Heaven",
     type: "Concept Poster",
     year: "2026",
-    image: "/portfolio/stairway.webp",
+    image: assetPath("/portfolio/stairway.webp"),
     alt: "Blue and yellow Stairway to Heaven poster with a ladder rising through clouds",
   },
   {
     title: "Keep on Dreaming",
     type: "Concept Poster",
     year: "2026",
-    image: "/portfolio/dreaming.webp",
+    image: assetPath("/portfolio/dreaming.webp"),
     alt: "Keep on Dreaming poster with a seated figure whose head is hidden inside a cloud",
   },
 ];
@@ -74,35 +77,35 @@ const services = [
 
 const heroCards = [
   {
-    image: "/portfolio/dont-fear.webp",
+    image: assetPath("/portfolio/dont-fear.webp"),
     className: "hero-card-slot-1",
     rotation: "-15deg",
     delay: "180ms",
     floatDelay: "0s",
   },
   {
-    image: "/portfolio/my-setup.webp",
+    image: assetPath("/portfolio/my-setup.webp"),
     className: "hero-card-slot-2",
     rotation: "8deg",
     delay: "300ms",
     floatDelay: "0.35s",
   },
   {
-    image: "/portfolio/stairway.webp",
+    image: assetPath("/portfolio/stairway.webp"),
     className: "hero-card-slot-3",
     rotation: "-4deg",
     delay: "120ms",
     floatDelay: "0.7s",
   },
   {
-    image: "/portfolio/dreaming.webp",
+    image: assetPath("/portfolio/dreaming.webp"),
     className: "hero-card-slot-4",
     rotation: "10deg",
     delay: "380ms",
     floatDelay: "0.18s",
   },
   {
-    image: "/portfolio/reel-poster.jpg",
+    image: assetPath("/portfolio/reel-poster.jpg"),
     className: "hero-card-slot-5",
     rotation: "16deg",
     delay: "240ms",
@@ -147,7 +150,7 @@ export default function Home() {
               <a className="brand" href="#top" aria-label="Aditya Kumar home">
                 <Image
                   className="logo-mark"
-                  src="/favicon.svg"
+                  src={assetPath("/favicon.svg")}
                   alt=""
                   width={64}
                   height={64}
@@ -189,12 +192,12 @@ export default function Home() {
               <h1 id="hero-title">
                 <span className="hero-line-mask">
                   <span className="hero-line hero-line-one">
-                    Make people stop.
+                    Designed to be seen.
                   </span>
                 </span>
                 <span className="hero-line-mask">
                   <span className="hero-line hero-line-two hero-line-muted">
-                    Then make them feel.
+                    Edited to be remembered.
                   </span>
                 </span>
               </h1>
@@ -343,10 +346,13 @@ export default function Home() {
                 controls
                 playsInline
                 preload="metadata"
-                poster="/portfolio/sample-reel-poster-v2.jpg"
+                poster={assetPath("/portfolio/sample-reel-poster-v2.jpg")}
                 aria-label="Aditya Kumar featured vertical video edit"
               >
-                <source src="/portfolio/sample-reel-h264.mp4?v=2" type="video/mp4" />
+                <source
+                  src={`${assetPath("/portfolio/sample-reel-h264.mp4")}?v=2`}
+                  type="video/mp4"
+                />
                 Your browser does not support embedded video.
               </video>
             </div>
@@ -372,11 +378,11 @@ export default function Home() {
                   controls
                   playsInline
                   preload="metadata"
-                  poster="/portfolio/green-screen-poster.jpg"
+                  poster={assetPath("/portfolio/green-screen-poster.jpg")}
                   aria-label="Landscape green screen editing sample by Aditya Kumar"
                 >
                   <source
-                    src="/portfolio/green-screen-edit.mp4"
+                    src={assetPath("/portfolio/green-screen-edit.mp4")}
                     type="video/mp4"
                   />
                 </video>
@@ -484,7 +490,7 @@ export default function Home() {
         <div className="footer-brand">
           <Image
             className="logo-mark"
-            src="/favicon.svg"
+            src={assetPath("/favicon.svg")}
             alt=""
             width={64}
             height={64}

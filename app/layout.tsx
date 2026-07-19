@@ -2,6 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+const siteBasePath = process.env.NEXT_PUBLIC_SITE_BASE_PATH ?? "";
+const assetPath = (path: string) => `${siteBasePath}${path}`;
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://adityaxeditior.github.io/.com/";
+const metadataOrigin = new URL(new URL(siteUrl).origin);
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -13,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: metadataOrigin,
   title: "Aditya Kumar - Graphic Designer & Video Editor",
   description:
     "Selected graphic design and video editing work by Aditya Kumar, a multidisciplinary visual creator based in Greater Noida, India.",
@@ -36,7 +43,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/portfolio/dont-fear.webp",
+        url: assetPath("/portfolio/dont-fear.webp"),
         width: 1440,
         height: 1800,
         alt: "Selected poster work by Aditya Kumar",
@@ -48,11 +55,11 @@ export const metadata: Metadata = {
     title: "Aditya Kumar - Graphic Designer & Video Editor",
     description:
       "Selected graphic design and video editing work by Aditya Kumar.",
-    images: ["/portfolio/dont-fear.webp"],
+    images: [assetPath("/portfolio/dont-fear.webp")],
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: assetPath("/favicon.svg"),
+    shortcut: assetPath("/favicon.svg"),
   },
 };
 
