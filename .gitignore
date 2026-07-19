@@ -17,10 +17,17 @@
 /.next/
 /.vinext/
 /out/
+/build/
 
 # misc
 .DS_Store
 *.pem
+*.tmp
+*.temp
+*.cache
+.cache/
+tmp/
+temp/
 
 # debug
 npm-debug.log*
