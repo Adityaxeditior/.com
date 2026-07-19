@@ -71,11 +71,11 @@ const services = [
 ];
 
 const heroCards = [
-  { image: "/portfolio/dont-fear.webp", className: "hero-card-a" },
-  { image: "/portfolio/my-setup.webp", className: "hero-card-b" },
-  { image: "/portfolio/sample-reel-poster.jpg", className: "hero-card-c" },
-  { image: "/portfolio/stairway.webp", className: "hero-card-d" },
-  { image: "/portfolio/dreaming.webp", className: "hero-card-e" },
+  { image: "/portfolio/dont-fear.webp", className: "hero-card-1" },
+  { image: "/portfolio/my-setup.webp", className: "hero-card-2" },
+  { image: "/portfolio/stairway.webp", className: "hero-card-3" },
+  { image: "/portfolio/dreaming.webp", className: "hero-card-4" },
+  { image: "/portfolio/reel-poster.jpg", className: "hero-card-5" },
 ];
 
 const marqueeItems = [
@@ -109,34 +109,38 @@ export default function Home() {
         Skip to content
       </a>
       <header className="site-header" id="top">
-        <a className="brand" href="#top" aria-label="Aditya Kumar home">
-          <span className="logo-mark">AK</span>
-          <span>{siteConfig.name}</span>
-        </a>
-        <nav className="main-nav" aria-label="Primary navigation">
-          <a href="#work">Work</a>
-          <a href="#video">Video</a>
-          <a href="#about">About</a>
-        </nav>
-        <a
-          className="button button-dark header-cta"
-          href={siteConfig.whatsappUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Let&apos;s work ↗
-        </a>
+        <div className="shell header-shell">
+          <a className="brand" href="#top" aria-label="Aditya Kumar home">
+            <span className="logo-mark">AK</span>
+            <span>{siteConfig.name}</span>
+          </a>
+          <nav className="main-nav" aria-label="Primary navigation">
+            <a href="#work">Work</a>
+            <a href="#video">Video</a>
+            <a href="#about">About</a>
+          </nav>
+          <a
+            className="button button-dark header-cta"
+            href={siteConfig.whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Let&apos;s work ↗
+          </a>
+        </div>
       </header>
 
       <main id="main">
-        <section className="hero section-shell" aria-labelledby="hero-title">
+        <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow">Graphic design × Video editing</p>
+            <p className="eyebrow">GRAPHIC DESIGN × VIDEO EDITING</p>
             <h1 id="hero-title">
-              <span>Make people stop.</span>
-              <span className="muted-line">Then make them feel.</span>
+              <span className="hero-line">Make people stop.</span>
+              <span className="hero-line hero-line-muted">
+                Then make them feel.
+              </span>
             </h1>
-            <p className="hero-description">
+            <p className="hero-intro">
               I&apos;m Aditya, a multidisciplinary visual creator turning ideas
               into scroll-stopping designs and edits that hold attention.
             </p>
@@ -150,7 +154,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hero-cards" aria-hidden="true">
+          <div className="hero-stage" aria-hidden="true">
             {heroCards.map((card, index) => (
               <div
                 className={`hero-card ${card.className}`}
@@ -161,8 +165,9 @@ export default function Home() {
                   src={card.image}
                   alt=""
                   fill
-                  sizes="(max-width: 700px) 34vw, 220px"
+                  sizes="(max-width: 700px) 34vw, 275px"
                   priority={index < 3}
+                  unoptimized
                 />
               </div>
             ))}
@@ -222,6 +227,7 @@ export default function Home() {
                     fill
                     sizes="(max-width: 760px) 100vw, 48vw"
                     loading={index < 2 ? "eager" : "lazy"}
+                    unoptimized
                   />
                 </div>
                 <div className="project-meta">
@@ -267,7 +273,7 @@ export default function Home() {
                 controls
                 playsInline
                 preload="metadata"
-                poster="/portfolio/sample-reel-poster.jpg"
+                poster="/portfolio/reel-poster.jpg"
                 aria-label="Featured vertical video editing sample by Aditya Kumar"
               >
                 <source src="/portfolio/sample-reel.mp4" type="video/mp4" />
@@ -343,7 +349,8 @@ export default function Home() {
                   src={siteConfig.profileImage}
                   alt="Aditya Kumar, graphic designer and video editor"
                   fill
-                  sizes="(max-width: 800px) 100vw, 40vw"
+                  sizes="(max-width: 800px) 100vw, 520px"
+                  unoptimized
                 />
               ) : (
                 <div className="profile-placeholder" aria-hidden="true">

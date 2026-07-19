@@ -73,7 +73,7 @@ public/portfolio/green-screen-edit.mp4
 Also replace their poster images:
 
 ```bash
-public/portfolio/sample-reel-poster.jpg
+public/portfolio/reel-poster.jpg
 public/portfolio/green-screen-poster.jpg
 ```
 

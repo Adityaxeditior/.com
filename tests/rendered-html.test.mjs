@@ -32,6 +32,8 @@ test("server-renders Aditya Kumar portfolio content", async () => {
   assert.match(html, /<title>Aditya Kumar - Graphic Designer &amp; Video Editor<\/title>/i);
   assert.match(html, /Make people stop\./);
   assert.match(html, /Then make them feel\./);
+  assert.match(html, /class="hero-line"/);
+  assert.match(html, /class="hero-line hero-line-muted"/);
   assert.match(html, /01 \/ Selected Work/);
   assert.match(html, /02 \/ Video Editing/);
   assert.match(html, /03 \/ Services/);
@@ -55,11 +57,16 @@ test("keeps portfolio projects, media, and animation scoped correctly", async ()
   assert.equal((page.match(/type: "/g) ?? []).length, 4);
   assert.match(page, /sample-reel\.mp4/);
   assert.match(page, /green-screen-edit\.mp4/);
+  assert.match(page, /reel-poster\.jpg/);
   assert.match(page, /controls/);
   assert.match(page, /playsInline/);
   assert.match(page, /wa\.me\/918287980293/);
 
   assert.doesNotMatch(css, /\.hero\s*\{[^}]*position:\s*sticky/is);
+  assert.match(css, /\.hero-copy\s*\{[^}]*text-align:\s*center/is);
+  assert.match(css, /\.hero h1\s*\{[^}]*font-size:\s*clamp\(56px,\s*7\.4vw,\s*142px\)/is);
+  assert.match(css, /white-space:\s*nowrap/i);
+  assert.doesNotMatch(css, /word-break:\s*break-all|overflow-wrap:\s*anywhere/i);
   assert.match(css, /\.work-section\s*\{/);
   assert.match(css, /\.project-card:nth-child\(even\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
