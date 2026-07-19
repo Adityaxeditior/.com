@@ -189,6 +189,18 @@ video:focus-visible {
   color: var(--black);
 }
 
+.hero-motion {
+  position: relative;
+}
+
+.hero-motion:not(.hero-motion-ready) .site-header,
+.hero-motion:not(.hero-motion-ready) .hero-copy .eyebrow,
+.hero-motion:not(.hero-motion-ready) .hero-line,
+.hero-motion:not(.hero-motion-ready) .hero-intro,
+.hero-motion:not(.hero-motion-ready) .hero-actions {
+  opacity: 0;
+}
+
 .hero {
   position: relative;
   min-height: 100svh;
@@ -214,11 +226,13 @@ video:focus-visible {
 .hero::before {
   left: min(-14vw, -140px);
   top: 18vh;
+  animation: circle-drift-left 14s ease-in-out infinite alternate;
 }
 
 .hero::after {
   right: min(-13vw, -120px);
   top: 10vh;
+  animation: circle-drift-right 17s ease-in-out infinite alternate;
 }
 
 .hero-copy {
@@ -260,6 +274,11 @@ h2 {
 
 .hero-line {
   display: block;
+}
+
+.hero-line-mask {
+  display: block;
+  overflow: hidden;
 }
 
 @media (min-width: 1000px) {
@@ -307,6 +326,19 @@ h2 {
   color: var(--white);
 }
 
+.hero-actions .button,
+.header-cta {
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.hero-actions .button:hover,
+.header-cta:hover {
+  transform: translateY(-3px);
+}
+
 .text-link {
   min-height: 44px;
   display: inline-flex;
@@ -324,61 +356,173 @@ h2 {
   pointer-events: none;
 }
 
-.hero-card {
+.hero-card-slot {
   position: absolute;
-  overflow: hidden;
   width: clamp(145px, 17.5vw, 275px);
   aspect-ratio: 4 / 5;
+  pointer-events: none;
+}
+
+.hero-card-enter,
+.hero-card-float {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-card-enter {
+  opacity: 0;
+}
+
+.hero-card-float {
+  position: relative;
+  overflow: hidden;
   border: 8px solid rgba(255, 255, 255, 0.93);
   border-radius: 14px;
   background: #ddd;
   box-shadow: 0 22px 70px rgba(0, 0, 0, 0.18);
-  opacity: 0;
-  transform: translateY(72px) scale(0.95) rotate(var(--rotate));
-  transform-origin: center bottom;
-  animation: card-rise 900ms var(--ease) forwards;
+  animation: hero-card-float 5.5s ease-in-out
+    calc(var(--card-delay) + 1200ms + var(--float-delay)) infinite alternate;
 }
 
-.hero-card img {
+.hero-card-float img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.hero-card-1 {
-  --rotate: -15deg;
+.hero-card-slot-1 {
   left: -2vw;
   bottom: 2vh;
 }
 
-.hero-card-2 {
-  --rotate: 8deg;
+.hero-card-slot-2 {
   left: 19vw;
   bottom: 10vh;
 }
 
-.hero-card-3 {
-  --rotate: -4deg;
+.hero-card-slot-3 {
   left: 42vw;
   bottom: 3vh;
 }
 
-.hero-card-4 {
-  --rotate: 10deg;
+.hero-card-slot-4 {
   right: 17vw;
   bottom: 12vh;
 }
 
-.hero-card-5 {
-  --rotate: 16deg;
+.hero-card-slot-5 {
   right: -2vw;
   bottom: 1vh;
 }
 
-@keyframes card-rise {
+.hero-motion-ready .site-header {
+  animation: header-enter 800ms cubic-bezier(0.2, 0.8, 0.2, 1) 80ms both;
+}
+
+.hero-motion-ready .hero-copy .eyebrow {
+  animation: fade-up 700ms cubic-bezier(0.2, 0.8, 0.2, 1) 180ms both;
+}
+
+.hero-motion-ready .hero-line-one {
+  animation: line-enter 1000ms cubic-bezier(0.16, 0.9, 0.2, 1) 260ms both;
+}
+
+.hero-motion-ready .hero-line-two {
+  animation: line-enter 1000ms cubic-bezier(0.16, 0.9, 0.2, 1) 390ms both;
+}
+
+.hero-motion-ready .hero-intro {
+  animation: fade-up 800ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms both;
+}
+
+.hero-motion-ready .hero-actions {
+  animation: fade-up 800ms cubic-bezier(0.2, 0.8, 0.2, 1) 720ms both;
+}
+
+.hero-motion-ready .hero-card-enter {
+  animation: hero-card-enter 1200ms cubic-bezier(0.16, 0.9, 0.2, 1)
+    var(--card-delay) both;
+}
+
+@keyframes header-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
   to {
     opacity: 1;
-    transform: translateY(0) scale(1) rotate(var(--rotate));
+    transform: translateY(0);
+  }
+}
+
+@keyframes line-enter {
+  from {
+    opacity: 0;
+    transform: translateY(110%) rotate(1.5deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(190px) rotate(var(--card-rotation)) scale(0.84);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--card-rotation)) scale(1);
+  }
+}
+
+@keyframes hero-card-float {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-0.4deg);
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 0) rotate(0.5deg);
+  }
+
+  100% {
+    transform: translate3d(0, 6px, 0) rotate(-0.2deg);
+  }
+}
+
+@keyframes circle-drift-left {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(24px, -18px, 0) scale(1.05);
+  }
+}
+
+@keyframes circle-drift-right {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(-28px, 22px, 0) scale(0.96);
   }
 }
 
@@ -1031,28 +1175,32 @@ h2 {
     height: 32vh;
   }
 
-  .hero-card {
+  .hero-card-slot {
     width: clamp(112px, 32vw, 148px);
-    border-width: 5px;
-    border-radius: 12px;
   }
 
-  .hero-card-4,
-  .hero-card-5 {
+  .hero-card-float {
+    border-width: 5px;
+    border-radius: 12px;
+    animation-name: hero-card-float-mobile;
+  }
+
+  .hero-card-slot-4,
+  .hero-card-slot-5 {
     display: none;
   }
 
-  .hero-card-1 {
+  .hero-card-slot-1 {
     left: -7vw;
     bottom: 4vh;
   }
 
-  .hero-card-2 {
+  .hero-card-slot-2 {
     left: 33vw;
     bottom: 8vh;
   }
 
-  .hero-card-3 {
+  .hero-card-slot-3 {
     left: auto;
     right: -4vw;
     bottom: 3vh;
@@ -1173,6 +1321,20 @@ h2 {
   }
 }
 
+@keyframes hero-card-float-mobile {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-0.25deg);
+  }
+
+  50% {
+    transform: translate3d(0, -4px, 0) rotate(0.25deg);
+  }
+
+  100% {
+    transform: translate3d(0, 4px, 0) rotate(-0.15deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1200,6 +1362,23 @@ h2 {
 
   .project-image {
     transform: scale(1) !important;
+  }
+
+  .hero-motion *,
+  .hero-motion *::before,
+  .hero-motion *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero-motion .site-header,
+  .hero-motion .hero-copy .eyebrow,
+  .hero-motion .hero-line,
+  .hero-motion .hero-intro,
+  .hero-motion .hero-actions,
+  .hero-motion .hero-card-enter {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

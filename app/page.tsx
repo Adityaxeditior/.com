@@ -1,4 +1,6 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
+import HeroMotion from "./HeroMotion";
 import { WorkReveal } from "./WorkReveal";
 
 // EDIT YOUR DETAILS HERE
@@ -71,11 +73,41 @@ const services = [
 ];
 
 const heroCards = [
-  { image: "/portfolio/dont-fear.webp", className: "hero-card-1" },
-  { image: "/portfolio/my-setup.webp", className: "hero-card-2" },
-  { image: "/portfolio/stairway.webp", className: "hero-card-3" },
-  { image: "/portfolio/dreaming.webp", className: "hero-card-4" },
-  { image: "/portfolio/reel-poster.jpg", className: "hero-card-5" },
+  {
+    image: "/portfolio/dont-fear.webp",
+    className: "hero-card-slot-1",
+    rotation: "-15deg",
+    delay: "180ms",
+    floatDelay: "0s",
+  },
+  {
+    image: "/portfolio/my-setup.webp",
+    className: "hero-card-slot-2",
+    rotation: "8deg",
+    delay: "300ms",
+    floatDelay: "0.35s",
+  },
+  {
+    image: "/portfolio/stairway.webp",
+    className: "hero-card-slot-3",
+    rotation: "-4deg",
+    delay: "120ms",
+    floatDelay: "0.7s",
+  },
+  {
+    image: "/portfolio/dreaming.webp",
+    className: "hero-card-slot-4",
+    rotation: "10deg",
+    delay: "380ms",
+    floatDelay: "0.18s",
+  },
+  {
+    image: "/portfolio/reel-poster.jpg",
+    className: "hero-card-slot-5",
+    rotation: "16deg",
+    delay: "240ms",
+    floatDelay: "0.55s",
+  },
 ];
 
 const marqueeItems = [
@@ -108,76 +140,95 @@ export default function Home() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <header className="site-header" id="top">
-        <div className="shell header-shell">
-          <a className="brand" href="#top" aria-label="Aditya Kumar home">
-            <span className="logo-mark">AK</span>
-            <span>{siteConfig.name}</span>
-          </a>
-          <nav className="main-nav" aria-label="Primary navigation">
-            <a href="#work">Work</a>
-            <a href="#video">Video</a>
-            <a href="#about">About</a>
-          </nav>
-          <a
-            className="button button-dark header-cta"
-            href={siteConfig.whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Let&apos;s work ↗
-          </a>
-        </div>
-      </header>
-
       <main id="main">
-        <section className="hero" aria-labelledby="hero-title">
-          <div className="hero-copy">
-            <p className="eyebrow">GRAPHIC DESIGN × VIDEO EDITING</p>
-            <h1 id="hero-title">
-              <span className="hero-line">Make people stop.</span>
-              <span className="hero-line hero-line-muted">
-                Then make them feel.
-              </span>
-            </h1>
-            <p className="hero-intro">
-              I&apos;m Aditya, a multidisciplinary visual creator turning ideas
-              into scroll-stopping designs and edits that hold attention.
-            </p>
-            <div className="hero-actions">
-              <a className="button button-lime" href="#work">
-                Explore my work ↓
+        <HeroMotion>
+          <header className="site-header" id="top">
+            <div className="shell header-shell">
+              <a className="brand" href="#top" aria-label="Aditya Kumar home">
+                <span className="logo-mark">AK</span>
+                <span>{siteConfig.name}</span>
               </a>
-              <a className="text-link" href="#video">
-                Play sample reel ↗
+              <nav className="main-nav" aria-label="Primary navigation">
+                <a href="#work">Work</a>
+                <a href="#video">Video</a>
+                <a href="#about">About</a>
+              </nav>
+              <a
+                className="button button-dark header-cta"
+                href={siteConfig.whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Let&apos;s work ↗
               </a>
             </div>
-          </div>
+          </header>
 
-          <div className="hero-stage" aria-hidden="true">
-            {heroCards.map((card, index) => (
-              <div
-                className={`hero-card ${card.className}`}
-                style={{ animationDelay: `${index * 110}ms` }}
-                key={card.image}
-              >
-                <Image
-                  src={card.image}
-                  alt=""
-                  fill
-                  sizes="(max-width: 700px) 34vw, 275px"
-                  priority={index < 3}
-                  unoptimized
-                />
+          <section className="hero" aria-labelledby="hero-title">
+            <div className="hero-copy">
+              <p className="eyebrow">GRAPHIC DESIGN × VIDEO EDITING</p>
+              <h1 id="hero-title">
+                <span className="hero-line-mask">
+                  <span className="hero-line hero-line-one">
+                    Make people stop.
+                  </span>
+                </span>
+                <span className="hero-line-mask">
+                  <span className="hero-line hero-line-two hero-line-muted">
+                    Then make them feel.
+                  </span>
+                </span>
+              </h1>
+              <p className="hero-intro">
+                I&apos;m Aditya, a multidisciplinary visual creator turning
+                ideas into scroll-stopping designs and edits that hold
+                attention.
+              </p>
+              <div className="hero-actions">
+                <a className="button button-lime" href="#work">
+                  Explore my work ↓
+                </a>
+                <a className="text-link" href="#video">
+                  Play sample reel ↗
+                </a>
               </div>
-            ))}
-          </div>
+            </div>
 
-          <div className="hero-meta" aria-label="Availability and location">
-            <span>Available for select freelance projects</span>
-            <span>{siteConfig.location}</span>
-          </div>
-        </section>
+            <div className="hero-stage" aria-hidden="true">
+              {heroCards.map((card, index) => (
+                <div
+                  className={`hero-card-slot ${card.className}`}
+                  style={
+                    {
+                      "--card-rotation": card.rotation,
+                      "--card-delay": card.delay,
+                      "--float-delay": card.floatDelay,
+                    } as CSSProperties
+                  }
+                  key={card.image}
+                >
+                  <div className="hero-card-enter">
+                    <div className="hero-card-float">
+                      <Image
+                        src={card.image}
+                        alt=""
+                        fill
+                        sizes="(max-width: 700px) 34vw, 275px"
+                        priority={index < 3}
+                        unoptimized
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="hero-meta" aria-label="Availability and location">
+              <span>Available for select freelance projects</span>
+              <span>{siteConfig.location}</span>
+            </div>
+          </section>
+        </HeroMotion>
 
         <section className="marquee-strip" aria-label="Creative services">
           <div className="marquee-track">

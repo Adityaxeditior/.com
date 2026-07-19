@@ -32,8 +32,9 @@ test("server-renders Aditya Kumar portfolio content", async () => {
   assert.match(html, /<title>Aditya Kumar - Graphic Designer &amp; Video Editor<\/title>/i);
   assert.match(html, /Make people stop\./);
   assert.match(html, /Then make them feel\./);
-  assert.match(html, /class="hero-line"/);
-  assert.match(html, /class="hero-line hero-line-muted"/);
+  assert.match(html, /class="hero-line-mask"/);
+  assert.match(html, /class="hero-line hero-line-one"/);
+  assert.match(html, /class="hero-line hero-line-two hero-line-muted"/);
   assert.match(html, /01 \/ Selected Work/);
   assert.match(html, /02 \/ Video Editing/);
   assert.match(html, /03 \/ Services/);
@@ -65,6 +66,12 @@ test("keeps portfolio projects, media, and animation scoped correctly", async ()
   assert.doesNotMatch(css, /\.hero\s*\{[^}]*position:\s*sticky/is);
   assert.match(css, /\.hero-copy\s*\{[^}]*text-align:\s*center/is);
   assert.match(css, /\.hero h1\s*\{[^}]*font-size:\s*clamp\(56px,\s*7\.4vw,\s*142px\)/is);
+  assert.match(css, /\.hero-motion-ready \.hero-line-one/);
+  assert.match(css, /@keyframes hero-card-enter/);
+  assert.match(css, /@keyframes hero-card-float/);
+  assert.match(page, /HeroMotion/);
+  assert.match(page, /hero-card-enter/);
+  assert.match(page, /hero-card-float/);
   assert.match(css, /white-space:\s*nowrap/i);
   assert.doesNotMatch(css, /word-break:\s*break-all|overflow-wrap:\s*anywhere/i);
   assert.match(css, /\.work-section\s*\{/);
