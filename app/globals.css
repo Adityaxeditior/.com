@@ -1240,7 +1240,8 @@ h2 {
   }
 
   .hero {
-    min-height: max(760px, 100svh);
+    min-height: auto;
+    padding-bottom: 32px;
   }
 
   .hero::before,
@@ -1292,48 +1293,19 @@ h2 {
   }
 
   .hero-stage {
-    inset: auto 0 -7vh;
-    height: min(260px, 31svh);
-  }
-
-  .hero-card-slot {
-    width: clamp(104px, 30vw, 150px);
-  }
-
-  .hero-card-float {
-    border-width: 5px;
-    border-radius: 12px;
-    animation-name: hero-card-float-mobile;
-  }
-
-  .hero-card-slot-4,
-  .hero-card-slot-5 {
     display: none;
   }
 
-  .hero-card-slot-1 {
-    left: -8vw;
-    bottom: 34px;
-  }
-
-  .hero-card-slot-2 {
-    left: 34vw;
-    bottom: 72px;
-  }
-
-  .hero-card-slot-3 {
-    left: auto;
-    right: -5vw;
-    bottom: 30px;
-  }
-
   .hero-meta {
-    right: 14px;
-    bottom: clamp(150px, 21svh, 180px);
-    left: 14px;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: min(100% - 28px, 420px);
+    margin: 32px auto 0;
+    padding-bottom: 0;
     flex-direction: column;
     gap: 8px;
-    max-width: calc(100% - 28px);
     font-size: 0.62rem;
     letter-spacing: 0.075em;
     text-align: center;
@@ -1503,40 +1475,12 @@ h2 {
 }
 
 @media (max-width: 430px) {
-  .hero {
-    min-height: max(790px, 100svh);
-  }
-
   .hero-copy {
     padding-top: clamp(100px, 13svh, 118px);
   }
 
   .hero h1 {
     font-size: clamp(42px, 13.1vw, 57px);
-  }
-
-  .hero-stage {
-    inset: auto 0 -6vh;
-    height: min(244px, 29svh);
-  }
-
-  .hero-card-slot {
-    width: clamp(100px, 29vw, 128px);
-  }
-
-  .hero-card-slot-1 {
-    left: -10vw;
-    bottom: 30px;
-  }
-
-  .hero-card-slot-2 {
-    left: 33vw;
-    bottom: 64px;
-  }
-
-  .hero-card-slot-3 {
-    right: -8vw;
-    bottom: 28px;
   }
 }
 
@@ -1587,10 +1531,6 @@ h2 {
     font-size: 0.78rem;
   }
 
-  .hero {
-    min-height: max(800px, 100svh);
-  }
-
   .hero-copy {
     width: min(100% - 24px, 1600px);
     padding-top: 96px;
@@ -1615,29 +1555,6 @@ h2 {
     width: 100%;
   }
 
-  .hero-stage {
-    height: 232px;
-  }
-
-  .hero-card-slot {
-    width: clamp(92px, 28vw, 112px);
-  }
-
-  .hero-card-slot-1 {
-    left: -12vw;
-    bottom: 28px;
-  }
-
-  .hero-card-slot-2 {
-    left: 32vw;
-    bottom: 60px;
-  }
-
-  .hero-card-slot-3 {
-    right: -10vw;
-    bottom: 26px;
-  }
-
   .hero-meta {
     font-size: 0.58rem;
   }
@@ -1654,16 +1571,8 @@ h2 {
     font-size: 0.74rem;
   }
 
-  .hero {
-    min-height: max(805px, 100svh);
-  }
-
   .hero h1 {
     font-size: clamp(36px, 11.6vw, 39px);
-  }
-
-  .hero-stage {
-    height: 220px;
   }
 }
 
