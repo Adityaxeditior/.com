@@ -153,6 +153,18 @@ export default function Home() {
                 <a href="#video">Video</a>
                 <a href="#about">About</a>
               </nav>
+              <details className="mobile-menu">
+                <summary aria-label="Open navigation menu">
+                  <span aria-hidden="true" />
+                  <span aria-hidden="true" />
+                  <span aria-hidden="true" />
+                </summary>
+                <div className="mobile-menu-panel">
+                  <a href="#work">Work</a>
+                  <a href="#video">Video</a>
+                  <a href="#about">About</a>
+                </div>
+              </details>
               <a
                 className="button button-dark header-cta"
                 href={siteConfig.whatsappUrl}

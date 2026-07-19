@@ -36,6 +36,10 @@ body {
   font-family: var(--font-geist-sans), Arial, sans-serif;
 }
 
+main {
+  overflow-x: clip;
+}
+
 img,
 video {
   display: block;
@@ -124,6 +128,87 @@ video:focus-visible {
   color: var(--muted);
   font: 700 0.76rem/1 var(--font-geist-mono), monospace;
   text-transform: uppercase;
+}
+
+.mobile-menu {
+  position: relative;
+  display: none;
+  justify-self: end;
+}
+
+.mobile-menu summary {
+  display: grid;
+  width: 44px;
+  min-height: 44px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.48);
+  cursor: pointer;
+  list-style: none;
+}
+
+.mobile-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-menu summary span {
+  grid-area: 1 / 1;
+  width: 16px;
+  height: 2px;
+  border-radius: 99px;
+  background: var(--black);
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.mobile-menu summary span:nth-child(1) {
+  transform: translateY(-5px);
+}
+
+.mobile-menu summary span:nth-child(3) {
+  transform: translateY(5px);
+}
+
+.mobile-menu[open] summary span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.mobile-menu[open] summary span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu[open] summary span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.mobile-menu-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 25;
+  display: grid;
+  min-width: 150px;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 40px rgba(10, 10, 10, 0.14);
+  padding: 8px;
+}
+
+.mobile-menu-panel a {
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: var(--black);
+  font: 800 0.74rem/1 var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+}
+
+.mobile-menu-panel a:hover,
+.mobile-menu-panel a:focus-visible {
+  background: var(--lime);
 }
 
 .main-nav a,
@@ -1117,66 +1202,102 @@ h2 {
 @media (max-width: 760px) {
   .shell,
   .section-shell {
-    width: min(100% - 28px, 1320px);
+    width: min(100% - 24px, 1320px);
   }
 
   .header-shell {
-    grid-template-columns: 1fr auto;
-    min-height: 76px;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 8px;
+    min-height: 72px;
   }
 
   .main-nav {
     display: none;
   }
 
+  .mobile-menu {
+    display: block;
+  }
+
   .brand {
-    gap: 9px;
-    font-size: 0.96rem;
+    min-width: 0;
+    gap: 8px;
+    font-size: clamp(0.82rem, 3.4vw, 0.96rem);
+    line-height: 1;
   }
 
   .logo-mark {
     width: 38px;
+    flex: 0 0 auto;
     border-radius: 11px;
   }
 
   .header-cta {
     min-height: 44px;
-    padding-inline: 14px;
-    font-size: 0.92rem;
+    padding-inline: clamp(12px, 3.8vw, 16px);
+    font-size: clamp(0.82rem, 3.2vw, 0.92rem);
+    white-space: nowrap;
   }
 
   .hero {
-    min-height: 100svh;
+    min-height: max(760px, 100svh);
+  }
+
+  .hero::before,
+  .hero::after {
+    width: clamp(260px, 82vw, 420px);
+    opacity: 0.5;
+  }
+
+  .hero::before {
+    left: -48vw;
+    top: 24vh;
+  }
+
+  .hero::after {
+    right: -54vw;
+    top: 8vh;
   }
 
   .hero-copy {
     width: min(100% - 28px, 1600px);
-    padding-top: clamp(124px, 18vh, 156px);
+    padding-top: clamp(108px, 14svh, 132px);
   }
 
   .hero h1 {
-    font-size: clamp(52px, 16vw, 74px);
-    line-height: 0.9;
+    margin-top: 18px;
+    font-size: clamp(43px, 13.6vw, 72px);
+    line-height: 0.94;
+    letter-spacing: -0.068em;
   }
 
   .hero-intro {
-    font-size: 1rem;
+    max-width: 35rem;
+    margin-top: 22px;
+    font-size: clamp(0.94rem, 3.8vw, 1rem);
+    line-height: 1.55;
   }
 
   .hero-actions {
     align-items: center;
     flex-direction: column;
     gap: 12px;
-    margin-top: 26px;
+    margin-top: 24px;
+  }
+
+  .hero-actions .button,
+  .hero-actions .text-link {
+    width: min(100%, 260px);
+    justify-content: center;
   }
 
   .hero-stage {
-    inset: auto 0 -11vh;
-    height: 32vh;
+    inset: auto 0 -7vh;
+    height: min(260px, 31svh);
   }
 
   .hero-card-slot {
-    width: clamp(112px, 32vw, 148px);
+    width: clamp(104px, 30vw, 150px);
   }
 
   .hero-card-float {
@@ -1191,28 +1312,31 @@ h2 {
   }
 
   .hero-card-slot-1 {
-    left: -7vw;
-    bottom: 4vh;
+    left: -8vw;
+    bottom: 34px;
   }
 
   .hero-card-slot-2 {
-    left: 33vw;
-    bottom: 8vh;
+    left: 34vw;
+    bottom: 72px;
   }
 
   .hero-card-slot-3 {
     left: auto;
-    right: -4vw;
-    bottom: 3vh;
+    right: -5vw;
+    bottom: 30px;
   }
 
   .hero-meta {
-    bottom: 20px;
-    left: 14px;
     right: 14px;
+    bottom: clamp(150px, 21svh, 180px);
+    left: 14px;
     flex-direction: column;
     gap: 8px;
-    font-size: 0.64rem;
+    max-width: calc(100% - 28px);
+    font-size: 0.62rem;
+    letter-spacing: 0.075em;
+    text-align: center;
   }
 
   .marquee-track span {
@@ -1305,6 +1429,117 @@ h2 {
   }
 }
 
+@media (min-width: 761px) and (max-width: 900px) {
+  .shell,
+  .section-shell {
+    width: min(100% - 36px, 1320px);
+  }
+
+  .header-shell {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 12px;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .hero {
+    min-height: max(820px, 100svh);
+  }
+
+  .hero-copy {
+    width: min(100% - 44px, 1600px);
+    padding-top: clamp(130px, 15svh, 160px);
+  }
+
+  .hero h1 {
+    font-size: clamp(74px, 11vw, 100px);
+    line-height: 0.91;
+  }
+
+  .hero-stage {
+    inset: auto 0 -7vh;
+    height: 36vh;
+  }
+
+  .hero-card-slot {
+    width: clamp(136px, 22vw, 190px);
+  }
+
+  .hero-card-slot-1 {
+    left: -5vw;
+    bottom: 4vh;
+  }
+
+  .hero-card-slot-2 {
+    left: 24vw;
+    bottom: 10vh;
+  }
+
+  .hero-card-slot-3 {
+    left: auto;
+    right: 23vw;
+    bottom: 4vh;
+  }
+
+  .hero-card-slot-4 {
+    right: -3vw;
+    bottom: 10vh;
+  }
+
+  .hero-card-slot-5 {
+    display: none;
+  }
+
+  .hero-meta {
+    right: 18px;
+    left: 18px;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero {
+    min-height: max(790px, 100svh);
+  }
+
+  .hero-copy {
+    padding-top: clamp(100px, 13svh, 118px);
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 13.1vw, 57px);
+  }
+
+  .hero-stage {
+    inset: auto 0 -6vh;
+    height: min(244px, 29svh);
+  }
+
+  .hero-card-slot {
+    width: clamp(100px, 29vw, 128px);
+  }
+
+  .hero-card-slot-1 {
+    left: -10vw;
+    bottom: 30px;
+  }
+
+  .hero-card-slot-2 {
+    left: 33vw;
+    bottom: 64px;
+  }
+
+  .hero-card-slot-3 {
+    right: -8vw;
+    bottom: 28px;
+  }
+}
+
 @media (max-width: 390px) {
   .header-cta {
     padding-inline: 12px;
@@ -1312,12 +1547,123 @@ h2 {
   }
 
   .brand span:last-child {
-    max-width: 82px;
+    max-width: 76px;
     line-height: 1;
   }
 
   .hero h1 {
-    font-size: clamp(48px, 15vw, 66px);
+    font-size: clamp(40px, 12.8vw, 50px);
+  }
+}
+
+@media (max-width: 360px) {
+  .shell,
+  .section-shell {
+    width: min(100% - 20px, 1320px);
+  }
+
+  .header-shell {
+    gap: 6px;
+  }
+
+  .brand {
+    gap: 6px;
+  }
+
+  .logo-mark {
+    width: 34px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+  }
+
+  .mobile-menu summary {
+    width: 42px;
+    min-height: 42px;
+  }
+
+  .header-cta {
+    min-height: 42px;
+    padding-inline: 11px;
+    font-size: 0.78rem;
+  }
+
+  .hero {
+    min-height: max(800px, 100svh);
+  }
+
+  .hero-copy {
+    width: min(100% - 24px, 1600px);
+    padding-top: 96px;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.075em;
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 12.2vw, 44px);
+    letter-spacing: -0.062em;
+  }
+
+  .hero-intro {
+    font-size: 0.92rem;
+  }
+
+  .hero-actions .button,
+  .hero-actions .text-link {
+    width: 100%;
+  }
+
+  .hero-stage {
+    height: 232px;
+  }
+
+  .hero-card-slot {
+    width: clamp(92px, 28vw, 112px);
+  }
+
+  .hero-card-slot-1 {
+    left: -12vw;
+    bottom: 28px;
+  }
+
+  .hero-card-slot-2 {
+    left: 32vw;
+    bottom: 60px;
+  }
+
+  .hero-card-slot-3 {
+    right: -10vw;
+    bottom: 26px;
+  }
+
+  .hero-meta {
+    font-size: 0.58rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .brand span:last-child {
+    max-width: 64px;
+    font-size: 0.76rem;
+  }
+
+  .header-cta {
+    padding-inline: 10px;
+    font-size: 0.74rem;
+  }
+
+  .hero {
+    min-height: max(805px, 100svh);
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 11.6vw, 39px);
+  }
+
+  .hero-stage {
+    height: 220px;
   }
 }
 
