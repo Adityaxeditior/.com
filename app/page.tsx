@@ -145,7 +145,14 @@ export default function Home() {
           <header className="site-header" id="top">
             <div className="shell header-shell">
               <a className="brand" href="#top" aria-label="Aditya Kumar home">
-                <span className="logo-mark">AK</span>
+                <Image
+                  className="logo-mark"
+                  src="/favicon.svg"
+                  alt=""
+                  width={64}
+                  height={64}
+                  priority
+                />
                 <span>{siteConfig.name}</span>
               </a>
               <nav className="main-nav" aria-label="Primary navigation">
@@ -475,7 +482,13 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="footer-brand">
-          <span className="logo-mark">AK</span>
+          <Image
+            className="logo-mark"
+            src="/favicon.svg"
+            alt=""
+            width={64}
+            height={64}
+          />
           <span>{siteConfig.name}</span>
         </div>
         <p>
