@@ -320,14 +320,15 @@ export default function Home() {
                 <strong>00:31 · Vertical edit</strong>
               </div>
               <video
-                className="phone-video"
+                className="phone-video portfolio-video"
                 controls
                 playsInline
                 preload="metadata"
-                poster="/portfolio/reel-poster.jpg"
-                aria-label="Featured vertical video editing sample by Aditya Kumar"
+                poster="/portfolio/sample-reel-poster-v2.jpg"
+                aria-label="Aditya Kumar featured vertical video edit"
               >
-                <source src="/portfolio/sample-reel.mp4" type="video/mp4" />
+                <source src="/portfolio/sample-reel-h264.mp4?v=2" type="video/mp4" />
+                Your browser does not support embedded video.
               </video>
             </div>
 
