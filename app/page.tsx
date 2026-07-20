@@ -1,55 +1,11 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import AboutMotion from "./AboutMotion";
+import { designProjects } from "./designProjects";
 import HeroMotion from "./HeroMotion";
+import SiteHeader from "./SiteHeader";
+import { assetPath, siteConfig } from "./siteConfig";
 import { WorkReveal } from "./WorkReveal";
-
-const siteBasePath = process.env.NEXT_PUBLIC_SITE_BASE_PATH ?? "";
-const assetPath = (path: string) => `${siteBasePath}${path}`;
-
-// EDIT YOUR DETAILS HERE
-const siteConfig = {
-  name: "Aditya Kumar",
-  title: "Graphic Designer & Video Editor",
-  location: "Greater Noida, India",
-  whatsappDisplay: "+91 82879 80293",
-  whatsappUrl:
-    "https://wa.me/918287980293?text=Hi%20Aditya%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20discuss%20a%20project",
-  instagramUrl: "https://instagram.com/ez_made.design/",
-  aboutPortrait: assetPath("/portfolio/aditya-about-cutout.png"),
-};
-
-// EDIT YOUR DESIGN PROJECTS HERE
-const designWork = [
-  {
-    title: "Don\u2019t Fear",
-    type: "Concept Poster",
-    year: "2026",
-    image: assetPath("/portfolio/dont-fear.webp"),
-    alt: "Surreal Don't Fear poster with a desert, stars and a doorway into the sky",
-  },
-  {
-    title: "My Little Setup",
-    type: "Social Creative",
-    year: "2026",
-    image: assetPath("/portfolio/my-setup.webp"),
-    alt: "Warm desk setup social media design featuring a laptop, tablet, mouse and phone",
-  },
-  {
-    title: "Stairway to Heaven",
-    type: "Concept Poster",
-    year: "2026",
-    image: assetPath("/portfolio/stairway.webp"),
-    alt: "Blue and yellow Stairway to Heaven poster with a ladder rising through clouds",
-  },
-  {
-    title: "Keep on Dreaming",
-    type: "Concept Poster",
-    year: "2026",
-    image: assetPath("/portfolio/dreaming.webp"),
-    alt: "Keep on Dreaming poster with a seated figure whose head is hidden inside a cloud",
-  },
-];
 
 // EDIT YOUR SERVICES HERE
 const services = [
@@ -140,33 +96,33 @@ const greenScreenSkills = [
 const aboutTools = [
   {
     name: "Adobe Premiere Pro",
-    monogram: "PR",
+    icon: assetPath("/icons/software/premiere-pro.svg"),
+    iconAlt: "Adobe Premiere Pro logo",
     accent: "#999cff",
-    ink: "#17154a",
   },
   {
     name: "Adobe Photoshop",
-    monogram: "PS",
+    icon: assetPath("/icons/software/photoshop.svg"),
+    iconAlt: "Adobe Photoshop logo",
     accent: "#7bc7ff",
-    ink: "#06233e",
   },
   {
     name: "Adobe After Effects",
-    monogram: "AE",
+    icon: assetPath("/icons/software/after-effects.svg"),
+    iconAlt: "Adobe After Effects logo",
     accent: "#bba7ff",
-    ink: "#25164b",
   },
   {
     name: "Adobe Illustrator",
-    monogram: "AI",
+    icon: assetPath("/icons/software/illustrator.svg"),
+    iconAlt: "Adobe Illustrator logo",
     accent: "#e6aa61",
-    ink: "#3b2108",
   },
   {
     name: "Figma",
-    monogram: "FI",
+    icon: assetPath("/icons/software/figma.svg"),
+    iconAlt: "Figma logo",
     accent: "#f2a1bd",
-    ink: "#401628",
   },
 ];
 
@@ -178,46 +134,7 @@ export default function Home() {
       </a>
       <main id="main">
         <HeroMotion>
-          <header className="site-header" id="top">
-            <div className="shell header-shell">
-              <a className="brand" href="#top" aria-label="Aditya Kumar home">
-                <Image
-                  className="logo-mark"
-                  src={assetPath("/favicon.svg")}
-                  alt=""
-                  width={64}
-                  height={64}
-                  priority
-                />
-                <span>{siteConfig.name}</span>
-              </a>
-              <nav className="main-nav" aria-label="Primary navigation">
-                <a href="#work">Work</a>
-                <a href="#video">Video</a>
-                <a href="#about">About</a>
-              </nav>
-              <details className="mobile-menu">
-                <summary aria-label="Open navigation menu">
-                  <span aria-hidden="true" />
-                  <span aria-hidden="true" />
-                  <span aria-hidden="true" />
-                </summary>
-                <div className="mobile-menu-panel">
-                  <a href="#work">Work</a>
-                  <a href="#video">Video</a>
-                  <a href="#about">About</a>
-                </div>
-              </details>
-              <a
-                className="button button-dark header-cta"
-                href={siteConfig.whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Let&apos;s work ↗
-              </a>
-            </div>
-          </header>
+          <SiteHeader />
 
           <section className="hero" aria-labelledby="hero-title">
             <div className="hero-copy">
@@ -305,46 +222,76 @@ export default function Home() {
         >
           <WorkReveal />
           <div className="work-progress" aria-hidden="true" />
-          <div className="section-intro work-intro" data-work-heading>
-            <p className="eyebrow">01 / Selected Work</p>
-            <h2 id="work-title">Designed to earn the pause.</h2>
-            <p>
-              A mix of surreal poster exploration and social-first design—built
-              around strong composition, clear hierarchy and a memorable mood.
-            </p>
-          </div>
+          <div className="work-layout">
+            <div className="work-content">
+              <div className="section-intro work-intro" data-work-heading>
+                <p className="eyebrow">01 / Selected Work</p>
+                <h2 id="work-title">Designed to earn the pause.</h2>
+                <p>
+                  A mix of surreal poster exploration and social-first
+                  design—built around strong composition, clear hierarchy and a
+                  memorable mood.
+                </p>
+              </div>
 
-          <div className="project-grid">
-            {designWork.map((project, index) => (
-              <article
-                className="project-card"
-                data-work-card
-                data-direction={index % 2 === 0 ? "right" : "left"}
-                key={project.title}
+              <div className="project-grid">
+                {designProjects.map((project, index) => (
+                  <article
+                    className="project-card"
+                    data-work-card
+                    data-direction={index % 2 === 0 ? "right" : "left"}
+                    key={project.title}
+                  >
+                    <div className="project-image-wrap">
+                      <span className="project-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <Image
+                        className="project-image"
+                        src={project.image}
+                        alt={project.alt}
+                        fill
+                        sizes="(max-width: 760px) 100vw, 48vw"
+                        loading={index < 2 ? "eager" : "lazy"}
+                        unoptimized
+                      />
+                    </div>
+                    <div className="project-meta">
+                      <h3>{project.title}</h3>
+                      <div>
+                        <span>{project.type}</span>
+                        <span>{project.year}</span>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <a
+                className="work-archive-link work-archive-link-horizontal"
+                href={assetPath("/design-projects/")}
+                aria-label="View all graphic design projects"
               >
-                <div className="project-image-wrap">
-                  <span className="project-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <Image
-                    className="project-image"
-                    src={project.image}
-                    alt={project.alt}
-                    fill
-                    sizes="(max-width: 760px) 100vw, 48vw"
-                    loading={index < 2 ? "eager" : "lazy"}
-                    unoptimized
-                  />
-                </div>
-                <div className="project-meta">
-                  <h3>{project.title}</h3>
-                  <div>
-                    <span>{project.type}</span>
-                    <span>{project.year}</span>
-                  </div>
-                </div>
-              </article>
-            ))}
+                <span>View all design projects</span>
+                <span className="work-archive-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            </div>
+
+            <aside className="work-archive-rail" aria-label="Design archive">
+              <a
+                className="work-archive-link work-archive-link-vertical"
+                href={assetPath("/design-projects/")}
+                aria-label="View all graphic design projects"
+              >
+                <span className="work-archive-arrow" aria-hidden="true">
+                  ↗
+                </span>
+                <span className="work-archive-label">
+                  View all design projects
+                </span>
+              </a>
+            </aside>
           </div>
         </section>
 
@@ -461,6 +408,18 @@ export default function Home() {
                 <div className="about-create-mask" aria-hidden="true">
                   <span className="about-create-word">Create</span>
                 </div>
+                <figure className="about-landscape-media">
+                  <div className="about-landscape-enter">
+                    <Image
+                      className="about-landscape-image"
+                      src={siteConfig.aboutPortrait}
+                      alt="Aditya Kumar standing in front of a palace"
+                      fill
+                      sizes="(max-width: 767px) calc(100vw - 58px), (max-width: 1024px) 52vw, 850px"
+                      unoptimized
+                    />
+                  </div>
+                </figure>
                 <p className="about-creative-line about-reveal">
                   Designs that connect.
                   <span>Edits that stay.</span>
@@ -494,7 +453,7 @@ export default function Home() {
                 </div>
 
                 <div className="about-tools">
-                  <h3 className="about-reveal">Tools I create with</h3>
+                  <h3 className="about-reveal">Tools I use</h3>
                   <ul className="about-tool-grid">
                     {aboutTools.map((tool, index) => (
                       <li
@@ -503,35 +462,24 @@ export default function Home() {
                         style={
                           {
                             "--tool-accent": tool.accent,
-                            "--tool-ink": tool.ink,
-                            "--tool-delay": `${660 + index * 75}ms`,
+                            "--tool-delay": `${610 + index * 70}ms`,
                           } as CSSProperties
                         }
                       >
-                        <span className="about-tool-icon" aria-hidden="true">
-                          {tool.monogram}
-                        </span>
-                        <span>{tool.name}</span>
+                        <Image
+                          className="about-tool-logo"
+                          src={tool.icon}
+                          alt={tool.iconAlt}
+                          width={52}
+                          height={52}
+                          unoptimized
+                        />
+                        <span className="about-tool-name">{tool.name}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </article>
-
-              <figure className="about-portrait-stage">
-                <div className="about-portrait-enter">
-                  <div className="about-portrait-parallax">
-                    <Image
-                      className="about-portrait-image"
-                      src={siteConfig.aboutPortrait}
-                      alt="Aditya Kumar, graphic designer and video editor"
-                      fill
-                      sizes="(max-width: 767px) 170vw, (max-width: 1279px) 76vw, 900px"
-                      unoptimized
-                    />
-                  </div>
-                </div>
-              </figure>
             </div>
           </AboutMotion>
         </section>

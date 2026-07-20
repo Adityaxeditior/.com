@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { assetPath } from "./siteConfig";
 
-const siteBasePath = process.env.NEXT_PUBLIC_SITE_BASE_PATH ?? "";
-const assetPath = (path: string) => `${siteBasePath}${path}`;
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://adityaxeditior.github.io/.com/";
 const metadataOrigin = new URL(new URL(siteUrl).origin);
