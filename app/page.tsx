@@ -14,8 +14,8 @@ const siteConfig = {
   whatsappDisplay: "+91 82879 80293",
   whatsappUrl:
     "https://wa.me/918287980293?text=Hi%20Aditya%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20discuss%20a%20project",
-  instagramUrl: "https://www.instagram.com/ez_made.design/",
-  profileImage: "",
+  instagramUrl: "https://instagram.com/ez_made.design/",
+  profileImage: assetPath("/portfolio/aditya-profile.webp"),
 };
 
 // EDIT YOUR DESIGN PROJECTS HERE
@@ -420,20 +420,14 @@ export default function Home() {
           aria-labelledby="about-title"
         >
           <div className="section-shell about-shell">
-            <div className="about-image" aria-label="Profile photograph area">
-              {siteConfig.profileImage ? (
-                <Image
-                  src={siteConfig.profileImage}
-                  alt="Aditya Kumar, graphic designer and video editor"
-                  fill
-                  sizes="(max-width: 800px) 100vw, 520px"
-                  unoptimized
-                />
-              ) : (
-                <div className="profile-placeholder" aria-hidden="true">
-                  AK
-                </div>
-              )}
+            <div className="about-image">
+              <Image
+                src={siteConfig.profileImage}
+                alt="Aditya Kumar, graphic designer and video editor"
+                fill
+                sizes="(max-width: 800px) 100vw, 520px"
+                unoptimized
+              />
               <span>Based in Greater Noida</span>
             </div>
             <div className="about-copy">
@@ -501,8 +495,23 @@ export default function Home() {
           {siteConfig.title} · {siteConfig.location}
         </p>
         <div className="footer-links">
-          <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">
-            Instagram ↗
+          <a
+            className="instagram-link"
+            href={siteConfig.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open Aditya Kumar on Instagram in a new tab"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              focusable="false"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.2" cy="6.8" r="1" />
+            </svg>
+            <span>Instagram ↗</span>
           </a>
           <a href="#top">Back to top ↑</a>
         </div>
