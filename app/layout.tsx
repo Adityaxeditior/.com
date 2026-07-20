@@ -3,8 +3,13 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { assetPath } from "./siteConfig";
 
+const vercelProductionHost =
+  process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://adityaxeditior.github.io/.com/";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL === "1" && vercelProductionHost
+    ? `https://${vercelProductionHost}/`
+    : "https://adityaxeditior.github.io/.com/");
 const metadataOrigin = new URL(new URL(siteUrl).origin);
 
 const geistSans = Geist({
