@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
+import AboutMotion from "./AboutMotion";
 import HeroMotion from "./HeroMotion";
 import { WorkReveal } from "./WorkReveal";
 
@@ -15,7 +16,7 @@ const siteConfig = {
   whatsappUrl:
     "https://wa.me/918287980293?text=Hi%20Aditya%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20discuss%20a%20project",
   instagramUrl: "https://instagram.com/ez_made.design/",
-  profileImage: assetPath("/portfolio/aditya-profile.webp"),
+  aboutPortrait: assetPath("/portfolio/aditya-about-cutout.png"),
 };
 
 // EDIT YOUR DESIGN PROJECTS HERE
@@ -135,7 +136,39 @@ const greenScreenSkills = [
   "Sound-led cuts",
 ];
 
-const toolLabels = ["Photoshop", "Premiere Pro", "After Effects"];
+// EDIT YOUR ABOUT SOFTWARE HERE
+const aboutTools = [
+  {
+    name: "Adobe Premiere Pro",
+    monogram: "PR",
+    accent: "#999cff",
+    ink: "#17154a",
+  },
+  {
+    name: "Adobe Photoshop",
+    monogram: "PS",
+    accent: "#7bc7ff",
+    ink: "#06233e",
+  },
+  {
+    name: "Adobe After Effects",
+    monogram: "AE",
+    accent: "#bba7ff",
+    ink: "#25164b",
+  },
+  {
+    name: "Adobe Illustrator",
+    monogram: "AI",
+    accent: "#e6aa61",
+    ink: "#3b2108",
+  },
+  {
+    name: "Figma",
+    monogram: "FI",
+    accent: "#f2a1bd",
+    ink: "#401628",
+  },
+];
 
 export default function Home() {
   return (
@@ -419,39 +452,88 @@ export default function Home() {
           id="about"
           aria-labelledby="about-title"
         >
-          <div className="section-shell about-shell">
-            <div className="about-image">
-              <Image
-                src={siteConfig.profileImage}
-                alt="Aditya Kumar, graphic designer and video editor"
-                fill
-                sizes="(max-width: 800px) 100vw, 520px"
-                unoptimized
-              />
-              <span>Based in Greater Noida</span>
-            </div>
-            <div className="about-copy">
-              <p className="eyebrow">04 / About Me</p>
-              <h2 id="about-title">
-                I build the frame—and the feeling after it.
-              </h2>
-              <p className="lead">
-                I&apos;m Aditya Kumar, a graphic designer and video editor
-                focused on work that is clear, energetic and hard to scroll
-                past.
-              </p>
-              <p>
-                My process combines Photoshop-led visual design with Premiere
-                Pro and After Effects, so I can carry one idea from a static
-                campaign into motion without losing its personality.
-              </p>
-              <div className="tool-list">
-                {toolLabels.map((tool) => (
-                  <span key={tool}>{tool}</span>
-                ))}
+          <AboutMotion>
+            <div className="section-shell about-editorial">
+              <div className="about-visual-panel">
+                <p className="about-status about-reveal">
+                  Available for select freelance projects
+                </p>
+                <div className="about-create-mask" aria-hidden="true">
+                  <span className="about-create-word">Create</span>
+                </div>
+                <p className="about-creative-line about-reveal">
+                  Designs that connect.
+                  <span>Edits that stay.</span>
+                </p>
               </div>
+
+              <article className="about-info-panel">
+                <div className="about-info-copy">
+                  <p className="eyebrow about-reveal">About Aditya</p>
+                  <h2 className="about-reveal" id="about-title">
+                    I turn ideas into visuals people remember.
+                  </h2>
+                  <p className="about-description about-reveal">
+                    I&apos;m Aditya, a graphic designer and video editor based
+                    in Greater Noida. I create scroll-stopping designs,
+                    engaging edits and clean visual experiences that help ideas
+                    connect with people.
+                  </p>
+                  <div className="about-availability about-reveal">
+                    <span aria-hidden="true" />
+                    Available for freelance projects
+                  </div>
+                  <a
+                    className="button button-dark about-cta about-reveal"
+                    href={siteConfig.whatsappUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Let&apos;s work ↗
+                  </a>
+                </div>
+
+                <div className="about-tools">
+                  <h3 className="about-reveal">Tools I create with</h3>
+                  <ul className="about-tool-grid">
+                    {aboutTools.map((tool, index) => (
+                      <li
+                        className="about-tool-card"
+                        key={tool.name}
+                        style={
+                          {
+                            "--tool-accent": tool.accent,
+                            "--tool-ink": tool.ink,
+                            "--tool-delay": `${660 + index * 75}ms`,
+                          } as CSSProperties
+                        }
+                      >
+                        <span className="about-tool-icon" aria-hidden="true">
+                          {tool.monogram}
+                        </span>
+                        <span>{tool.name}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+
+              <figure className="about-portrait-stage">
+                <div className="about-portrait-enter">
+                  <div className="about-portrait-parallax">
+                    <Image
+                      className="about-portrait-image"
+                      src={siteConfig.aboutPortrait}
+                      alt="Aditya Kumar, graphic designer and video editor"
+                      fill
+                      sizes="(max-width: 767px) 170vw, (max-width: 1279px) 76vw, 900px"
+                      unoptimized
+                    />
+                  </div>
+                </div>
+              </figure>
             </div>
-          </div>
+          </AboutMotion>
         </section>
 
         <section className="contact-section section-shell" aria-labelledby="contact-title">
